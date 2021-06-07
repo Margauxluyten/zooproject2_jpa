@@ -1,9 +1,19 @@
 package com.realdolmen.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Food {
     //TODO: add id and foodName fields + constructor + getters
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String foodName;
+
+
 
     public Food(int id, String foodName) {
         this.id = id;

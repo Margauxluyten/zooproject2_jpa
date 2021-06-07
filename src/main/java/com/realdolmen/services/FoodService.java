@@ -2,12 +2,14 @@ package com.realdolmen.services;
 
 import com.realdolmen.domain.Food;
 import com.realdolmen.repositories.FoodRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class FoodService {
-
-    private FoodRepository foodRepository = new FoodRepository();
+    @Autowired
+    private FoodRepository foodRepository;
 
     public List<Food> getAllFood() {
         return foodRepository.getAllFoodFromDb();

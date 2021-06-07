@@ -5,36 +5,34 @@ import com.realdolmen.domain.Tiger;
 import com.realdolmen.repositories.FoodRepository;
 import com.realdolmen.repositories.NotFoundException;
 import com.realdolmen.repositories.TigerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public class TigerService {
+    @Autowired
+    private TigerRepository tigerRepository;
 
-    private TigerRepository tigerRepository = new TigerRepository();
-    private FoodRepository foodRepository = new FoodRepository();
 
 
     public List<Tiger> getTigers() {
-        List<Tiger> tigers = tigerRepository.getTigersFromDb();
-        for (Tiger tiger : tigers) {
-            tiger.setFoods(foodRepository.findAllFoodByAnimalId(tiger.getId()));
-        }
-        return tigers;
+        return tigerRepository.getTigersFromDb();
+
     }
 
 
     public void addATiger(Tiger tiger) {
         tigerRepository.addATigerInDb(tiger);
-        for(Food food : tiger.getFoods()){
-            foodRepository.saveFoodForAnimalId(food,tiger.getId());
-        }
+        //     for(Food food : tiger.getFoods()){
+        //         foodRepository.saveFoodForAnimalId(food,tiger.getId());
     }
 
+//}
+
     public Tiger findById(int id) {
-        Tiger tiger = tigerRepository.findById(id);
-        tiger.setFoods(foodRepository.findAllFoodByAnimalId(tiger.getId()));
-        return tiger;
+        return tigerRepository.findById(id);
     }
 
     public void updateTiger(Tiger tiger) {
@@ -43,6 +41,7 @@ public class TigerService {
     }
 
     public void removeById(int id) {
+
         tigerRepository.removeById(id);
     }
 }

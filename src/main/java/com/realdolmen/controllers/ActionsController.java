@@ -4,16 +4,19 @@ import com.realdolmen.domain.Tiger;
 import com.realdolmen.services.CountryService;
 import com.realdolmen.services.FoodService;
 import com.realdolmen.services.TigerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ActionsController {
-
-    private TigerService tigerService = new TigerService();
-    private CountryService countryService = new CountryService();
-    private FoodService foodService = new FoodService();
+    @Autowired
+    private TigerService tigerService;
+    @Autowired
+    private CountryService countryService;
+    @Autowired
+    private FoodService foodService;
 
     @GetMapping(value = "/editPage/{id}")
     public String showEditPage(@PathVariable("id") int id, Model model){
